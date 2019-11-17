@@ -1,0 +1,35 @@
+<div class="card">
+    <div class="card-body">
+        <form>
+            <input type="text" name="searchInput" class="form-control" placeholder="Search Record" #searchInput="ngModel" [(ngModel)]="searchText" style="width: 90%;float: left;">
+            <button class="btn btn-danger" (click)="searchText=''">x</button>
+        </form>
+    </div>
+</div>
+<br>
+<table class="table table-sm table-bordered table-hover">
+    <thead>
+        <th>Full Name</th>
+        <th>Email</th>
+        <th>Contact Number</th>
+        <th>Action</th>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let customer of customerArray">
+            <tr *ngIf="filterCondition(customer)">
+                <td>{{customer.fullName}}</td>
+                <td>{{customer.email}}</td>
+                <td>{{customer.mobile}}</td>
+                <td>
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                        <button class="btn btn-sm btn-warning" (click)="customerService.populateForm(customer)">Edit</button>
+                        <button class="btn btn-sm btn-danger" (click)="onDelete(customer.$key)">Delete</button>
+                    </div>                    
+                </td>
+            </tr>
+        </ng-container>
+    </tbody>
+</table>
+<div class="alert alert-danger" *ngIf="showDeletedMessage">
+    Data Deleted Successfully
+</div>

@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "target": "angularCrudWithFirebase",
+      "public": "dist/angularCrudWithFirebase",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}

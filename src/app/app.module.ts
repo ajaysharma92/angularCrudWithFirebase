@@ -10,6 +10,8 @@ import { CustomerListComponent } from './customer-list/customer-list.component';
 import { CustomerService } from './shared/customer.service'
 import { environment } from 'src/environments/environment';
 
+import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +23,9 @@ import { environment } from 'src/environments/environment';
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
-    FormsModule
+    FormsModule,
+    NgbPaginationModule,
+    NgbAlertModule
   ],
   providers: [
     CustomerService

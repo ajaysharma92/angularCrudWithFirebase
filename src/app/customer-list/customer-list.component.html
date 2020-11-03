@@ -1,13 +1,13 @@
 <div class="card">
     <div class="card-body">
         <form>
-            <input type="text" name="searchInput" class="form-control" placeholder="Search Record" #searchInput="ngModel" [(ngModel)]="searchText" style="width: 90%;float: left;">
-            <button class="btn btn-danger" (click)="searchText=''">x</button>
+            <input type="text" name="searchInput" class="form-control rounded-0 border-right-0 col-9 col-md-10" placeholder="Search Record" #searchInput="ngModel" [(ngModel)]="searchText" style="width: 90%;float: left;">
+            <button class="btn btn-danger rounded-0 text-uppercase font-weight-bold col-3 col-md-2" (click)="searchText=''">x</button>
         </form>
     </div>
 </div>
 <br>
-<table class="table table-sm table-bordered table-hover">
+<table class="table table-sm table-bordered table-hover table-responsive-sm w-100">
     <thead>
         <th>Full Name</th>
         <th>Email</th>
@@ -15,14 +15,14 @@
         <th>Action</th>
     </thead>
     <tbody>
-        <ng-container *ngFor="let customer of customerArray">
+        <ng-container *ngFor="let customer of customerArray | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
             <tr *ngIf="filterCondition(customer)">
                 <td>{{customer.fullName}}</td>
                 <td>{{customer.email}}</td>
                 <td>{{customer.mobile}}</td>
                 <td>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <button class="btn btn-sm btn-warning" (click)="customerService.populateForm(customer)">Edit</button>
+                        <button class="btn btn-sm btn-warning" (click)="customerService.populateForm(customer, 'Update')">Edit</button>
                         <button class="btn btn-sm btn-danger" (click)="onDelete(customer.$key)">Delete</button>
                     </div>                    
                 </td>
@@ -30,6 +30,7 @@
         </ng-container>
     </tbody>
 </table>
+<ngb-pagination [collectionSize]="customerArray.length" [pageSize]="pageSize" [(page)]="page" aria-label="Default pagination"></ngb-pagination>
 <div class="alert alert-danger" *ngIf="showDeletedMessage">
     Data Deleted Successfully
 </div>

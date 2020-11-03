@@ -12,6 +12,7 @@ export class CustomerComponent implements OnInit {
   submitted : boolean;
   showSuccessMessage : boolean;
   formControls = this.customerService.form.controls;
+  successMesg: string = 'Data Submitted Successfully';
 
   ngOnInit() {
   }
@@ -25,6 +26,7 @@ export class CustomerComponent implements OnInit {
         this.customerService.updateCustomer(this.customerService.form.value);
         this.showSuccessMessage = true;
         setTimeout(() => this.showSuccessMessage = false, 3000);
+        this.customerService.btnText = 'Submit';
       this.submitted = false;
       this.customerService.form.reset();
     }

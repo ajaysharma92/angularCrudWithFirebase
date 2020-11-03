@@ -1,15 +1,25 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ViewChild, AfterViewInit, Renderer2, ElementRef, RendererFactory2 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 import { from } from 'rxjs';
 
+import { CustomerComponent } from '../customer/customer.component';
+
 @Injectable({
   providedIn: 'root'
 })
-export class CustomerService {
+export class CustomerService implements AfterViewInit {
 
-  constructor(private firebase: AngularFireDatabase) { }
+  @ViewChild('btnText', {static: false}) customerCom: ElementRef;
+  btnText:string = 'Submit';
+  successMesg: string;
+
+  constructor(private firebase: AngularFireDatabase, private renderer: RendererFactory2) { }
   customerList: AngularFireList<any>;
+
+  ngAfterViewInit() {
+    this.customerCom.nativeElement.text = 'Update';
+  }
 
   form = new FormGroup({
     $key: new FormControl(null),
@@ -31,9 +41,11 @@ export class CustomerService {
       mobile: customer.mobile,
       location: customer.location
     });
+    this.successMesg = 'Data Submitted Successfully';
   }
 
-  populateForm(customer){
+  populateForm(customer, btnTxt){
+    this.btnText = btnTxt;
     this.form.setValue(customer);
   }
 
@@ -45,6 +57,7 @@ export class CustomerService {
         mobile: customer.mobile,
         location: customer.location,
       });
+      this.successMesg = 'Data Updated Successfully';
   }
 
   deleteCustomer($key : string){

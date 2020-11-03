@@ -29,11 +29,11 @@
                 <input type="text" name="location" id="location" formControlName = "location" class="form-control">
             </div>
             <div class="form-group">
-                <input type="submit" id="formSubmitBtn" class="btn btn-primary btn-block" value="Submit">
+                <input type="submit" #btnSubmit id="formSubmitBtn" class="btn btn-primary btn-block" [disabled]="!this.customerService.form.valid" value="{{customerService.btnText}}">
             </div>
         </form>
         <div class="alert alert-info" *ngIf="showSuccessMessage">
-            Data Submitted Successfully
+            {{customerService.successMesg}}
         </div>
     </div>
     <div class="col-md-7">

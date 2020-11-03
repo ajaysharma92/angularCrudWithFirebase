@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "angularcrudwithfirebase-9d843": {
+      "hosting": {
+        "angularCrudWithFirebase": [
+          "angularcrudwithfirebase-9d843"
+        ]
+      }
+    }
+  }
+}

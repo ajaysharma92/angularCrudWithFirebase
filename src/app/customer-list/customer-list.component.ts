@@ -13,6 +13,8 @@ export class CustomerListComponent implements OnInit {
   customerArray = [];
   showDeletedMessage : boolean;
   searchText: string = "";
+  page = 1;
+  pageSize = 5;
 
   ngOnInit() {
     this.customerService.getCustomers().subscribe(
